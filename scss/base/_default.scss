@@ -2,6 +2,10 @@
 	html {
 		scroll-behavior: smooth;
 		scrollbar-gutter: stable;
+		overflow-x: clip;
+	}
+	body {
+		min-block-size: 100dvh;
 	}
 	img {
 		max-inline-size: 100%;

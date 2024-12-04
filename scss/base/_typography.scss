@@ -5,10 +5,12 @@
 		font-size: 1rem;
 		font-weight: 400;
 		line-height: 1.5;
+		hyphens: auto;
 	}
 	:where(h1, h2, h3, h4, h5, h6) {
 		font-weight: 600;
 		text-transform: uppercase;
+		text-wrap: balance;
 	}
 	:where(h1, h2, h3) {
 		line-height: 1.1;
@@ -30,5 +32,8 @@
 	}
 	h6 {
 		font-size: 1.125rem;
+	}
+	p {
+		text-wrap: pretty;
 	}
 }
