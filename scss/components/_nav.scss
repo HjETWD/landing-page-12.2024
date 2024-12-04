@@ -1,4 +1,37 @@
 @layer components.nav {
 	.nav {
+		$this: &;
+
+		&__container {
+			@extend %flex-big-gap;
+			justify-content: space-between;
+		}
+		
+		&__start {
+			@extend %flex-big-gap;
+			justify-content: flex-start;
+		}
+		&__end {
+			@extend %flex-big-gap;
+			justify-content: flex-end;
+		}
+		
+		&__list {
+			@extend #{$this}__start;
+		}
+		&__item {
+			display: flex;
+		}
+		
+		&__link {
+		}
+
 	}
+}
+
+%flex-big-gap {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	flex-wrap: wrap;
 }

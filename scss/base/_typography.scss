@@ -11,6 +11,13 @@
 		font-weight: 600;
 		text-transform: uppercase;
 		text-wrap: balance;
+
+		&:not(:first-child) {
+			margin-block-start: 1em;
+		}
+		& + * {
+			margin-block-end: 1em;
+		}
 	}
 	:where(h1, h2, h3) {
 		line-height: 1.1;
@@ -35,5 +42,29 @@
 	}
 	p {
 		text-wrap: pretty;
+		&:not(:first-child) {
+			margin-block-start: 1em;
+		}
+		& + * {
+			margin-block-end: 1em;
+		}
+	}
+	a {
+		text-decoration: 0.0625rem underline dashed;
+		text-decoration-color: transparent;
+		
+		outline: 0.0625rem dashed transparent;
+	
+		@media (prefers-reduced-motion: no-preference) {
+			transition: var(--base-transition, 0.2s ease-in-out);
+			transition-property: color, outline-color, text-decoration-color;
+		}
+		
+		&:hover {
+			text-decoration-color: currentColor;
+		}
+		&:focus-visible {
+			outline-color: currentColor;
+		}
 	}
 }
