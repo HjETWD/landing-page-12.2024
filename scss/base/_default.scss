@@ -1,0 +1,11 @@
+@layer base.default {
+	html {
+		scroll-behavior: smooth;
+		scrollbar-gutter: stable;
+	}
+	img {
+		max-inline-size: 100%;
+		block-size: auto;
+		vertical-align: middle;
+	}
+}
