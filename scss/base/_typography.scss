@@ -12,12 +12,7 @@
 		text-transform: uppercase;
 		text-wrap: balance;
 
-		&:not(:first-child) {
-			margin-block-start: 1em;
-		}
-		& + * {
-			margin-block-end: 1em;
-		}
+		margin-block: 1.5em 0.5em;
 	}
 	:where(h1, h2, h3) {
 		line-height: 1.1;
@@ -42,12 +37,6 @@
 	}
 	p {
 		text-wrap: pretty;
-		&:not(:first-child) {
-			margin-block-start: 1em;
-		}
-		& + * {
-			margin-block-end: 1em;
-		}
 	}
 	a {
 		text-decoration: 0.0625rem underline dashed;
@@ -67,4 +56,47 @@
 			outline-color: currentColor;
 		}
 	}
+
+	blockquote,
+	q {
+		font-style: italic;
+
+		&:not(:has(>*)) {
+			&::before,
+			&::after {
+				@extend %quote-style;
+			}
+			&::before {
+				@extend %quote-start;
+			}
+			&::after {
+				@extend %quote-end;
+			}
+		}
+		& {
+			& :first-child::before,
+			& :last-child::after {
+				@extend %quote-style;
+			}
+			& :first-child::before {
+				@extend %quote-start;
+			}
+			& :last-child::after {
+				@extend %quote-end;
+			}
+		}
+
+	}
+}
+%quote-style {
+	font-weight: 300;
+	font-size: 1.7em;
+	line-height: 0.6;
+	vertical-align: text-top;
+}
+%quote-start {
+	content: open-quote;
+}
+%quote-end {
+	content: close-quote;
 }
