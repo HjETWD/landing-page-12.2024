@@ -1,0 +1,12 @@
+@layer components.snow-fall {
+	.snow-fall {
+		--snow-fall-size: 1rem;
+		--snow-fall-color: #c3ebd1;
+
+		position: fixed;
+		inset: 0;
+		pointer-events: none;
+		user-select: none;
+		mix-blend-mode: screen;
+	}
+}
