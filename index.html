@@ -160,15 +160,18 @@
 			<div class="section__container container">
 				<h2 class="section__title">Обратная связь</h2>
 				<form class="form">
-					<label>
-						<input class="form__input" type="text" placeholder="Как к Вам обращаться?">
-					</label>
-					<label>
-						<input class="form__input" type="email" placeholder="Укажите свой email">
-					</label>
-					<label>
-						<input class="form__input" type="phone" placeholder="Укажите номер своего телефона">
-					</label>
+					<div class="form__wrapper">
+						<label for="name" class="form__label">Ваше имя:</label>
+						<input id="name" class="form__input" type="text" placeholder="Как к Вам обращаться?">
+					</div>
+					<div class="form__wrapper">
+						<label for="email" class="form__label">Email:</label>
+						<input id="email" class="form__input" type="email" placeholder="Укажите свой email">
+					</div>
+					<div class="form__wrapper">
+						<label for="phone" class="form__label">Телефон:</label>
+						<input id="phone" class="form__input" type="phone" placeholder="Укажите номер своего телефона">
+					</div>
 					<button class="form__button button" type="button">Отправить форму</button>
 				</form>
 			</div>
@@ -177,7 +180,9 @@
 	</main>
 
 	<footer class="footer">
-		<div class="container">footer</div>
+		<div class="container">
+			<p>&copy; Все права защищены. 2024.</p>
+		</div>
 	</footer>
 </body>
 

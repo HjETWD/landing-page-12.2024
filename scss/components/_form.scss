@@ -1,0 +1,58 @@
+@layer components.form {
+	.form {
+		display: grid;
+		gap: 1rem;
+
+		&__wrapper {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			gap: 0.5rem;
+
+			@media (width < 40rem) {
+				align-items: flex-start;
+				flex-direction: column;
+			}
+		}
+		&__input {
+			min-inline-size: 10rem;
+			flex-grow: 1;
+			padding: 0.25rem 0.5rem;
+			
+			border: 0.0625rem solid #ccc;
+			
+			outline: 0.0625rem dashed transparent;
+
+			@media (width < 40rem) {
+				inline-size: 100%;
+			}
+
+			@media (prefers-reduced-motion: no-preference) {
+				transition: var(--base-transition, 0.2s ease-in-out);
+				transition-property: color, border-color, outline-color;
+			}
+
+			&::placeholder {
+				opacity: 0.5;
+				@media (prefers-reduced-motion: no-preference) {
+					transition: var(--base-transition, 0.2s ease-in-out) opacity;
+				}
+			}
+			&:hover,
+			&:focus-visible {
+				border-color: #a8a8a8;
+			}
+			&:focus-visible {
+				outline-color: currentColor;
+				&::placeholder {
+					opacity: 0.75;
+				}
+			}
+		}
+		&__button {
+			justify-content: center;
+		}
+	}
+}
