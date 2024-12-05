@@ -12,4 +12,13 @@
 		block-size: auto;
 		vertical-align: middle;
 	}
+	:where(h1, h2, h3, h4, h5, h6) {
+		margin-block: 1.5em 0.5em;
+	}
+
+	p,
+	blockquote {
+		margin-block: 1em;
+	}
+
 }
