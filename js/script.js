@@ -36,6 +36,38 @@ function changeCallbackSendButton() {
 	callbackSendButton.innerHTML = callbackSendButton.disabled ? callbackSendButton.dataset.textDisabled : callbackSendButton.dataset.textEnabled
 }
 
-document.addEventListener('DOMContentLoaded', changeCallbackSendButton);
+function validationCallbackInput(input) {
+	if (input.validity.patternMismatch && input.dataset.messagePattern) {
+		input.setCustomValidity(input.dataset.messagePattern)
+	} else if (input.validity.valueMissing && input.dataset.messageEmpty) {
+		input.setCustomValidity(input.dataset.messageEmpty)
+	} else {
+		input.setCustomValidity('')
+	}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+	changeCallbackSendButton()
+	const formDataFromStorage = JSON.parse(localStorage.getItem('callback'))
+	const formData = new FormData(document.querySelector('#form'))
+	console.log(formDataFromStorage, formData);
+	for (const id in formDataFromStorage) {
+		formData.set(id, formDataFromStorage[id])
+		document.querySelector(`#${id}`).value = formDataFromStorage[id]
+	}
+})
 callbackPolicyCheckbox.addEventListener('change', changeCallbackSendButton)
 
+
+document.querySelectorAll('input[required]').forEach(input => {
+	input.addEventListener('change', () => {
+		validationCallbackInput(input)
+	})
+})
+
+document.querySelector('#form').addEventListener('submit', event => {
+	event.preventDefault();
+	const formDataToJson = (formData) => JSON.stringify(Object.fromEntries(formData));
+	const formData = formDataToJson(new FormData(event.target));
+	localStorage.setItem('callback', formData);
+})

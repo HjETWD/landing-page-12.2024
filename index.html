@@ -161,24 +161,23 @@
 		<section class="section" id="callback">
 			<div class="section__container container">
 				<h2 class="section__title">Об&shy;ра&shy;тна&shy;я связь</h2>
-				<form class="form">
+				<form id="form" class="form">
 					<div class="form__wrapper">
 						<label for="name" class="form__label">Ваше имя:</label>
-						<input id="name" class="form__input" type="text" placeholder="Как к Вам обращаться?" pattern="^[a-zA-Zа-яА-ЯЁё \-–.]+$" data-error-message="Разрешены символы латиницы, кириллицы, знаки дефиса и пробелы." aria-describedby="name-error" maxlength="150" required>
-						<span class="form__error input__name-error" id="name-error" aria-live="polite"></span>
+						<input id="name" name="name" class="form__input" type="text" placeholder="Как к Вам обращаться?" pattern="^[a-zA-Zа-яА-ЯЁё \-–]+$" data-message-pattern="Используйте символы кириллицы, латиницы, знаки дефиса (тире) или пробелы. К примеру: Анна Петрова или Иван Зан-Вакслер." data-message-empty="Представьтесь, что бы мы знали как к вам обращаться." maxlength="150" required>
 					</div>
 					<div class="form__wrapper">
 						<label for="email" class="form__label">Email:</label>
-						<input id="email" class="form__input" type="email" placeholder="Укажите свой email" pattern="^\S+@\S+\.\S+$" aria-describedby="email-error" required>
+						<input id="email" name="email" class="form__input" type="email" placeholder="Укажите свой email" pattern="^\S+@\S+\.\S+$" data-message-pattern="Используйте кирилицу, латиницу и спец. символы в формате name@site.com или ваше-имя@сайт.рф" data-message-empty="Укажите свой email, что бы мы могли с вами связаться." required>
 						<span class="form__error input__e-mail-error" id="email-error" aria-live="polite"></span>
 					</div>
 					<div class="form__wrapper">
 						<label for="phone" class="form__label">Телефон:</label>
-						<input id="phone" class="form__input" type="phone" placeholder="Укажите номер своего телефона" pattern="^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$" minlength="11" required>
+						<input id="phone" name="phone" class="form__input" type="phone" placeholder="Укажите номер своего телефона" pattern="^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$" data-message-pattern="Используйте цифры, +, скобки и тире в формате +7 (999) 999-99-99 или 87654321000, минимум 11 цифр." data-message-empty="Укажите свой номер телефона, что бы мы могли с вами связаться." minlength="11" required>
 					</div>
 					<div class="form__wrapper">
 						<label class="form__label">
-							<p><input id="policy" class="form__checkbox" type="checkbox" required> Отправляя заявку, вы даете <a href="#" onClick="return false;">согласие на обработку персональных данных</a> и соглашаетесь c <a href="#" onClick="return false;">политикой конфиденциальности</a></p>
+							<p><input id="policy" name="policy" class="form__checkbox" type="checkbox" required> Отправляя заявку, вы даете <a href="#" onClick="return false;">согласие на обработку персональных данных</a> и соглашаетесь c <a href="#" onClick="return false;">политикой конфиденциальности</a></p>
 						</label>
 					</div>
 					<button id="send" class="form__button button" type="submit" data-text-enabled="Отправить заявку" data-text-disabled="Для отправки формы мы должны получить ваше согласие на обработку персональных данных">Отправить заявку</button>
