@@ -21,5 +21,125 @@
 	blockquote {
 		margin-block: 1em;
 	}
+	
+	input {
+		min-block-size: 1.25em;
+		min-inline-size: 1.25em;
+		border: 0.0625rem solid #cccccc;
+		outline: 0.0625rem dashed transparent;
+		
+		border-block-end-color: initial;
 
+		@media (prefers-reduced-motion: no-preference) {
+			transition: var(--base-transition, 0.2s ease-in-out);
+			transition-property: color, background-color, border-color, outline-color, border-block-end-color;
+		}
+		
+		&::placeholder {
+			opacity: 0.5;
+			@media (prefers-reduced-motion: no-preference) {
+				transition: var(--base-transition, 0.2s ease-in-out);
+				transition-property: opacity;
+			}
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+			background-color: #eeeeee;
+		}
+		&:not(:disabled) {
+			cursor: text;
+		}
+		&:not(:disabled):where([type=checkbox], [type=radio]) {
+			cursor: pointer;
+		}
+		
+		&:hover,
+		&:focus-visible {
+			border-color: #a8a8a8;
+		}
+		&:focus {
+			&::placeholder {
+				opacity: 0.75;
+			}
+		}
+		&:focus-visible {
+			outline-color: currentColor;
+		}
+
+		&:required {
+			border-block-end-color: lightseagreen !important;
+		}
+		&:not(:placeholder-shown):invalid {
+			border-block-end-color: red !important;
+		}
+		&:not(:placeholder-shown):valid {
+			border-block-end-color: green !important;
+		}
+
+		&:where([type=checkbox], [type=radio]) {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			appearance: none;
+			position: relative;
+			aspect-ratio: 1;
+			&::before {
+				display: grid;
+				place-items: center;
+				position: absolute;
+				inset: 0;
+				content: '';
+				user-select: none;
+				pointer-events: none;
+				line-height: 0;
+				opacity: 0;
+				background-color: transparent;
+				aspect-ratio: 1;
+				@media (prefers-reduced-motion: no-preference) {
+					transition: var(--base-transition, .2s ease-in-out);
+					transition-property: opacity, background-color, box-shadow;
+				}
+			}
+			&:checked {
+				&::before {
+					opacity: 1;
+				}
+			}
+		}
+		&[type=checkbox] {
+			&::before {
+				content: '✓';
+			}
+		}
+		&[type=radio] {
+			&,
+			&::before {
+				border-radius: 50%;
+			}
+			&::before {
+				box-shadow: 0 0 0 0.1875em #fff inset;
+			}
+			&:checked {
+				&::before {
+					background-color: #888888;
+				}
+			}
+			&:hover,
+			&:focus-visible {
+				&::before {
+					background-color: #666666;
+					box-shadow: 0 0 0 0.125em #fff inset;
+				}
+			}
+
+		}
+
+	}
+	button {
+		&:disabled {
+			cursor: not-allowed;
+			background-color: #eeeeee;
+		}
+	}
 }
