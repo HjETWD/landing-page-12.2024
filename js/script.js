@@ -26,3 +26,16 @@ const end = new Date(now.getFullYear() + 1, 0, 6); // 6 января
 if (now >= start && now < end && snowFallContainer) {
 	addSnowFall(count);
 }
+
+
+const callbackPolicyCheckbox = document.querySelector('#policy')
+const callbackSendButton = document.querySelector('#send')
+
+function changeCallbackSendButton() {
+	callbackSendButton.disabled = !callbackPolicyCheckbox.checked
+	callbackSendButton.innerHTML = callbackSendButton.disabled ? callbackSendButton.dataset.textDisabled : callbackSendButton.dataset.textEnabled
+}
+
+document.addEventListener('DOMContentLoaded', changeCallbackSendButton);
+callbackPolicyCheckbox.addEventListener('change', changeCallbackSendButton)
+

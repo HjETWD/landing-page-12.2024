@@ -8,8 +8,9 @@
 	<link rel="preload" href="fonts/rax8HiqOu8IVPmn7e4xpLjxSmmLZyT8.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="fonts/rax8HiqOu8IVPmn7f4xpLjxSmmLZ.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="stylesheet" href="css/styles.min.css">
-	<script src="js/script.js" defer></script>
 	<script type="module" src="js/snow-fall.js"></script>
+	<script src="https://unpkg.com/validator@latest/validator.min.js" defer></script>
+	<script src="js/script.js" defer></script>
 </head>
 
 <body>
@@ -163,17 +164,24 @@
 				<form class="form">
 					<div class="form__wrapper">
 						<label for="name" class="form__label">Ваше имя:</label>
-						<input id="name" class="form__input" type="text" placeholder="Как к Вам обращаться?">
+						<input id="name" class="form__input" type="text" placeholder="Как к Вам обращаться?" pattern="^[a-zA-Zа-яА-ЯЁё \-–.]+$" data-error-message="Разрешены символы латиницы, кириллицы, знаки дефиса и пробелы." aria-describedby="name-error" maxlength="150" required>
+						<span class="form__error input__name-error" id="name-error" aria-live="polite"></span>
 					</div>
 					<div class="form__wrapper">
 						<label for="email" class="form__label">Email:</label>
-						<input id="email" class="form__input" type="email" placeholder="Укажите свой email">
+						<input id="email" class="form__input" type="email" placeholder="Укажите свой email" pattern="^\S+@\S+\.\S+$" aria-describedby="email-error" required>
+						<span class="form__error input__e-mail-error" id="email-error" aria-live="polite"></span>
 					</div>
 					<div class="form__wrapper">
 						<label for="phone" class="form__label">Телефон:</label>
-						<input id="phone" class="form__input" type="phone" placeholder="Укажите номер своего телефона">
+						<input id="phone" class="form__input" type="phone" placeholder="Укажите номер своего телефона" pattern="^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$" minlength="11" required>
 					</div>
-					<button class="form__button button" type="button">Отправить форму</button>
+					<div class="form__wrapper">
+						<label class="form__label">
+							<p><input id="policy" class="form__checkbox" type="checkbox" required> Отправляя заявку, вы даете <a href="#">согласие на обработку персональных данных</a> и соглашаетесь c <a href="#">политикой конфиденциальности</a></p>
+						</label>
+					</div>
+					<button id="send" class="form__button button" type="submit" data-text-enabled="Отправить заявку" data-text-disabled="Для отправки формы мы должны получить ваше согласие на обработку персональных данных">Отправить заявку</button>
 				</form>
 			</div>
 		</section>
