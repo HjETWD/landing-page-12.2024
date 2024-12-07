@@ -40,7 +40,7 @@
 	}
 	a {
 		text-decoration: 0.0625rem underline dashed;
-		text-decoration-color: transparent;
+		text-decoration-color: currentColor;
 		
 		outline: 0.0625rem dashed transparent;
 	
@@ -49,8 +49,9 @@
 			transition-property: color, outline-color, text-decoration-color;
 		}
 		
-		&:hover {
-			text-decoration-color: currentColor;
+		&:hover,
+		&:focus-visible {
+			text-decoration-color: transparent;
 		}
 		&:focus-visible {
 			outline-color: currentColor;
