@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	changeCallbackSendButton()
 	const formDataFromStorage = JSON.parse(localStorage.getItem('callback'))
 	const formData = new FormData(document.querySelector('#form'))
-	console.log(formDataFromStorage, formData);
 	for (const id in formDataFromStorage) {
 		formData.set(id, formDataFromStorage[id])
 		document.querySelector(`#${id}`).value = formDataFromStorage[id]
@@ -67,7 +66,42 @@ document.querySelectorAll('input[required]').forEach(input => {
 
 document.querySelector('#form').addEventListener('submit', event => {
 	event.preventDefault();
-	const formDataToJson = (formData) => JSON.stringify(Object.fromEntries(formData));
-	const formData = formDataToJson(new FormData(event.target));
-	localStorage.setItem('callback', formData);
+
+	// получаем данные из формы и преобразуем из в json
+	const formData = new FormData(event.target)
+	
+	// если не прошло больше 5 минут, ничего не делаем
+	const now = Date.now();
+	const minutes = 5
+	
+	console.log(((now - formData.get('wall')) / 60000));
+	
+	
+	if (((now - formData.get('wall')) / 60000) < minutes) {
+		console.log('Еще не прошло 5 минут с вашей прошлой отправки формы');
+		return;
+	}
+	formData.set('wall', now)
+	document.querySelector(`#wall`).value = now
+
+	// преобразуем данные формы в json
+	const formDataToJson = (form) => JSON.stringify(Object.fromEntries(form))
+	const formDataJson = formDataToJson(formData);
+
+	localStorage.setItem('callback', formDataJson)
+	console.info('Форма отправлена')
+	document.querySelector('.form__notify').hidden = false
+
 })
+
+const t = 300;
+const timeLimitCounter = setInterval(() => {
+	const now = Date.now()
+	const wall = document.querySelector(`#wall`)
+	const time = (now - wall.value) / 1000;
+	
+	if ((t - time) <= 0) {
+		wall.value = now
+		clearInterval(timeLimitCounter)
+	}
+}, 1000)
