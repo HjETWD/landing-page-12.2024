@@ -8,11 +8,13 @@ const snowFallContainer = document.querySelector('#snow-fall');
  */
 function addSnowFall(count = 100) {
 	// Создаем элемент <script> и добавляем его в документ
-	const script = document.createElement('script');
-	script.type = 'module';
-	script.src = 'js/snow-fall.js';
-	document.body.appendChild(script);
+	const snowFallScript = document.createElement('script');
+	snowFallScript.src = 'js/snow-fall.min.js?v=1.0.2';
+	snowFallScript.defer = true;
 
+	const targetScript = document.querySelector('script[src="js/script.js"]');
+	targetScript.parentNode.insertBefore(snowFallScript, targetScript);
+	
 	// Добавляем HTML-структуру для снежинок
 	snowFallContainer.innerHTML = `
 		<is-land class="snow-fall" on:media="(prefers-reduced-motion: no-preference)">
@@ -36,7 +38,12 @@ if (now >= start && now < end && snowFallContainer) {
 
 
 
-
+const callbackNameMask = IMask(document.querySelector('#name'), {
+	mask: /^([a-zA-Zа-яА-ЯЁё \-–])+$/
+});
+const callbackPhoneMask = IMask(document.querySelector('#phone'), {
+	mask: '+{7} (000) 000-00-00'
+});
 
 
 
@@ -47,6 +54,7 @@ const callbackSendButton = document.querySelector('#send');
 const formNotify = document.querySelector('.form__notify');
 const hiddenInput = document.querySelector('#wall');
 const timeLimitCounter = document.querySelector('#timeLimitCounter');
+const cookieConsentName = 'privacyConsent';
 
 /**
  * Функция изменяет состояние кнопки отправки формы в зависимости от состояния чекбокса согласия.
@@ -171,14 +179,13 @@ function startCountdown(seconds) {
  * @listens document#DOMContentLoaded - пространство имен и название события
  */
 document.addEventListener('DOMContentLoaded', () => {
-	// Включает или отключает кнопку отправки формы в зависимости от состояния чекбокса согласия
-	toggleSendButton();
-
-	// Получает значение куки 'privacyConsent' и устанавливает состояние чекбокса в соответствии с этим значением
-	const savedConsent = getCookie('privacyConsent');
+	// Получает значение куки 'cookieConsentName' и устанавливает состояние чекбокса в соответствии с этим значением
+	const savedConsent = getCookie(cookieConsentName);
 	if (savedConsent !== undefined) {
 		callbackPolicyCheckbox.checked = savedConsent === 'true';
 	}
+	// Включает или отключает кнопку отправки формы в зависимости от состояния чекбокса согласия
+	toggleSendButton();
 
 	// Загружает данные формы из localStorage и обновляет форму
 	const formDataFromStorage = JSON.parse(localStorage.getItem('callback'));
@@ -208,18 +215,18 @@ document.addEventListener('DOMContentLoaded', () => {
  * @param {Event} event - событие изменения состояния чекбокса
  */
 callbackPolicyCheckbox.addEventListener('change', event => {
-	// Включает или отключает кнопку отправки формы в зависимости от состояния чекбокса согласия
-	toggleSendButton();
-
-	// Устанавливает значение куки 'privacyConsent' в зависимости от состояния чекбокса
+	// Устанавливает значение куки 'cookieConsentName' в зависимости от состояния чекбокса
 	const consentValue = event.target.checked ? 'true' : 'false';
-	document.cookie = `privacyConsent=${consentValue}; path=/; max-age=31536000; SameSite=Lax; Secure`;
-
-	// Если чекбокс не активен, удаляет куку 'privacyConsent' и очищает данные формы
+	document.cookie = `${cookieConsentName}=${consentValue}; path=/; max-age=31536000; SameSite=Lax; Secure`;
+	
+	// Если чекбокс не активен, удаляет куку 'cookieConsentName' и очищает данные формы
 	if (!event.target.checked) {
-		document.cookie = `privacyConsent=; path=/; max-age=0; SameSite=None; Secure`;
+		document.cookie = `${cookieConsentName}=; path=/; max-age=0; SameSite=None; Secure`;
 		clearForm(document.querySelector('#form'));
 	}
+	
+	// Включает или отключает кнопку отправки формы в зависимости от состояния чекбокса согласия
+	toggleSendButton();
 });
 
 /**

@@ -40,23 +40,23 @@ class Snow extends HTMLElement {
 
 		// using vw units (max 100)
 		let dimensions = { width: 100, height: 100 };
-		let units = { x: "vw", y: "vh"};
+		let units = { x: "vw", y: "vh" };
 
-		if(mode === "element") {
+		if (mode === "element") {
 			dimensions = {
 				width: this.firstElementChild.clientWidth,
 				height: this.firstElementChild.clientHeight,
 			};
-			units = { x: "px", y: "px"};
+			units = { x: "px", y: "px" };
 		}
 
 		// Thank you @alphardex: https://codepen.io/alphardex/pen/dyPorwJ
-		for(let j = 1; j<= count; j++ ) {
-			let x = Snow.random(1, 100) * dimensions.width/100; // vw
-			let offset = Snow.random(-10, 10) * dimensions.width/100; // vw
+		for (let j = 1; j <= count; j++) {
+			let x = Snow.random(1, 100) * dimensions.width / 100; // vw
+			let offset = Snow.random(-10, 10) * dimensions.width / 100; // vw
 
 			let yoyo = Math.round(Snow.random(30, 100)); // % time
-			let yStart = yoyo * dimensions.height/100; // vh
+			let yStart = yoyo * dimensions.height / 100; // vh
 			let yEnd = dimensions.height; // vh
 
 			let scale = Snow.random(1, 10000) * .0001;
@@ -85,14 +85,14 @@ class Snow extends HTMLElement {
 
 	connectedCallback() {
 		// https://caniuse.com/mdn-api_cssstylesheet_replacesync
-		if(this.shadowRoot || !("replaceSync" in CSSStyleSheet.prototype)) {
+		if (this.shadowRoot || !("replaceSync" in CSSStyleSheet.prototype)) {
 			return;
 		}
 
 		let count = parseInt(this.getAttribute(Snow.attrs.count)) || 100;
 
 		let mode;
-		if(this.hasAttribute(Snow.attrs.mode)) {
+		if (this.hasAttribute(Snow.attrs.mode)) {
 			mode = this.getAttribute(Snow.attrs.mode);
 		} else {
 			mode = this.firstElementChild ? "element" : "page";
@@ -106,7 +106,7 @@ class Snow extends HTMLElement {
 		shadowroot.adoptedStyleSheets = [sheet];
 
 		let d = document.createElement("div");
-		for(let j = 0, k = count; j<k; j++) {
+		for (let j = 0, k = count; j < k; j++) {
 			shadowroot.appendChild(d.cloneNode());
 		}
 

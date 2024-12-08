@@ -8,7 +8,7 @@
 	<link rel="preload" href="fonts/rax8HiqOu8IVPmn7e4xpLjxSmmLZyT8.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="fonts/rax8HiqOu8IVPmn7f4xpLjxSmmLZ.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="stylesheet" href="css/styles.min.css">
-	<script type="module" src="js/snow-fall.js"></script>
+	<script src="js/imask.min.js?v=7.6.1" defer></script>
 	<script src="js/script.js" defer></script>
 </head>
 
@@ -160,6 +160,7 @@
 		<section class="section" id="callback">
 			<div class="section__container container">
 				<h2 class="section__title">Об&shy;ра&shy;тна&shy;я связь</h2>
+				<p>⚠ Это демонстрационна форма. Она не обрабатывает введенные вами данные и никуда их не отправляет.</p>
 				<form id="form" class="form">
 					<div class="form__wrapper">
 						<label for="name" class="form__label">Ваше имя:</label>
@@ -180,7 +181,7 @@
 						</label>
 					</div>
 					<input id="wall" name="wall" type="hidden" value="0">
-					<button id="send" class="form__button button" type="submit" data-text-enabled="Отправить заявку" data-text-disabled="Для отправки формы мы должны получить ваше согласие на обработку персональных данных">Отправить заявку</button>
+					<button id="send" class="form__button button" type="submit" data-text-enabled="Отправить заявку" data-text-disabled="Для отправки формы мы должны получить ваше согласие на обработку персональных данных" disabled>Отправить заявку</button>
 					<p class="form__notify" hidden>Форму можно отправлять 1 раз в <span id="timeLimit">5</span> минут: <span id="timeLimitCounter">5:00</span></p>
 				</form>
 			</div>
