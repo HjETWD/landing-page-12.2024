@@ -3,15 +3,19 @@
 		scroll-behavior: smooth;
 		scrollbar-gutter: stable;
 		overflow-x: clip;
+		interpolate-size: allow-keywords;
 	}
+
 	body {
 		min-block-size: 100dvh;
 	}
+
 	img {
 		max-inline-size: 100%;
 		block-size: auto;
 		vertical-align: middle;
 	}
+
 	:where(h1, h2, h3, h4, h5, h6) {
 		margin-block: 1.5em 0.5em;
 		overflow-x: clip;
@@ -21,22 +25,23 @@
 	blockquote {
 		margin-block: 1em;
 	}
-	
+
 	input {
 		min-block-size: 1.25em;
 		min-inline-size: 1.25em;
 		border: 0.0625rem solid #cccccc;
 		outline: 0.0625rem dashed transparent;
-		
+
 		border-block-end-color: initial;
 
 		@media (prefers-reduced-motion: no-preference) {
 			transition: var(--base-transition, 0.2s ease-in-out);
 			transition-property: color, background-color, border-color, outline-color, border-block-end-color;
 		}
-		
+
 		&::placeholder {
 			opacity: 0.5;
+
 			@media (prefers-reduced-motion: no-preference) {
 				transition: var(--base-transition, 0.2s ease-in-out);
 				transition-property: opacity;
@@ -47,22 +52,26 @@
 			cursor: not-allowed;
 			background-color: #eeeeee;
 		}
+
 		&:not(:disabled) {
 			cursor: text;
 		}
+
 		&:not(:disabled):where([type=checkbox], [type=radio]) {
 			cursor: pointer;
 		}
-		
+
 		&:hover,
 		&:focus-visible {
 			border-color: #a8a8a8;
 		}
+
 		&:focus {
 			&::placeholder {
 				opacity: 0.75;
 			}
 		}
+
 		&:focus-visible {
 			outline-color: currentColor;
 		}
@@ -70,9 +79,11 @@
 		&:required {
 			border-block-end-color: lightseagreen !important;
 		}
+
 		&:not(:placeholder-shown):invalid {
 			border-block-end-color: red !important;
 		}
+
 		&:not(:placeholder-shown):valid {
 			border-block-end-color: green !important;
 		}
@@ -84,6 +95,7 @@
 			appearance: none;
 			position: relative;
 			aspect-ratio: 1;
+
 			&::before {
 				display: grid;
 				place-items: center;
@@ -96,35 +108,43 @@
 				opacity: 0;
 				background-color: transparent;
 				aspect-ratio: 1;
+
 				@media (prefers-reduced-motion: no-preference) {
 					transition: var(--base-transition, .2s ease-in-out);
 					transition-property: opacity, background-color, box-shadow;
 				}
 			}
+
 			&:checked {
 				&::before {
 					opacity: 1;
 				}
 			}
 		}
+
 		&[type=checkbox] {
 			&::before {
 				content: '✓';
 			}
 		}
+
 		&[type=radio] {
+
 			&,
 			&::before {
 				border-radius: 50%;
 			}
+
 			&::before {
 				box-shadow: 0 0 0 0.1875em #fff inset;
 			}
+
 			&:checked {
 				&::before {
 					background-color: #888888;
 				}
 			}
+
 			&:hover,
 			&:focus-visible {
 				&::before {
@@ -136,10 +156,65 @@
 		}
 
 	}
+
 	button {
 		&:disabled {
 			cursor: not-allowed;
 			background-color: #eeeeee;
+		}
+	}
+
+	/* @media (prefers-reduced-motion: no-preference) {
+		transition: var(--base-transition, 0.2s ease-in-out);
+		transition-property: display, overlay, opacity;
+		transition-behavior: allow-discrete, allow-discrete, normal;
+	}
+	&::backdrop {
+		background-color: rgb(0 0 0 / 0%);
+		@media (prefers-reduced-motion: no-preference) {
+			transition: var(--base-transition, 0.2s ease-in-out);
+			transition-property: display, overlay, background-color;
+			transition-behavior: allow-discrete, allow-discrete, normal;
+		}
+	} */
+
+	dialog {
+		--base-transition: 1s;
+
+		display: none;
+		position: absolute;
+		inset: 0;
+		margin: auto;
+
+		opacity: 0;
+
+		@media (prefers-reduced-motion: no-preference) {
+			transition: var(--base-transition, 0.2s ease-in-out);
+			transition-property: display, overlay, visibility, opacity;
+			transition-behavior: allow-discrete, allow-discrete, normal, normal;
+		}
+
+		&:modal {
+			overlay: auto !important;
+		}
+
+		&[open] {
+			display: block;
+			position: fixed;
+			user-select: text;
+			visibility: visible;
+			overflow: auto;
+
+			opacity: 1;
+			
+			:has(&) {
+				overflow-y: clip;
+			}
+
+			@starting-style {
+				opacity: 0;
+				visibility: hidden;
+			}
 		}
 	}
 }
