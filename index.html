@@ -177,7 +177,7 @@
 					</div>
 					<div class="form__wrapper">
 						<label class="form__label">
-							<p><input id="policy" name="policy" class="form__checkbox" type="checkbox" required> Отправляя заявку, вы даете <a href="#" onClick="return false;">согласие на обработку персональных данных</a> и соглашаетесь c <a href="#" onClick="return false;">политикой конфиденциальности</a></p>
+							<p><input id="policy" name="policy" class="form__checkbox" type="checkbox" required> Отправляя заявку, вы даете <a href="#dialog" onClick="showDialog('#consentPersonalDataContent'); return false;">согласие на обработку персональных данных</a> и соглашаетесь c <a href="#dialog" onClick="showDialog('#privacyPolicyContent'); return false;">политикой конфиденциальности</a></p>
 						</label>
 					</div>
 					<input id="wall" name="wall" type="hidden" value="0">
@@ -195,7 +195,19 @@
 		</div>
 	</footer>
 
+	<dialog id="dialog" class="dialog">
+		<form class="dialog__container container" method="dialog">
+			<div class="dialog__content"></div>
+			<button class="dialog__button button button--close" type="button" onClick="closeDialog(this);" aria-label="Закрыть" title="Закрыть">X</button>
+		</form>
+	</dialog>
+
+	<div id="consentPersonalDataContent" style="display: none;">Далеко-далеко за словесными горами в стране гласных и согласных, живут рыбные тексты. Составитель мир коварный, до жизни решила за, которое заманивший себя возвращайся строчка свой дал города, грустный если заглавных путь вдали?</div>
+
+	<div id="privacyPolicyContent" style="display: none;">Текст всеми рекламных лучше моей наш, безорфографичный это. Переписали наш сбить, знаках всеми напоивший которое первую рукопись скатился переулка моей пунктуация прямо маленький за, рыбными заголовок! Над необходимыми безорфографичный жизни!</div>
+
 	<div id="snow-fall"></div>
+
 </body>
 
 </html>
