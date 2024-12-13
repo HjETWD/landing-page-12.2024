@@ -285,3 +285,30 @@ document.querySelector('#form').addEventListener('submit', event => {
 	formNotify.hidden = true;
 	console.info('Форма отправлена');
 });
+
+function showDialog(content) {
+	event = event || window.event;
+	event.preventDefault();
+	event.stopPropagation();
+	
+	const elementDialog = document.querySelector(event.target.getAttribute('href'));
+	const elementDialogContent = elementDialog.querySelector('.dialog__content')
+	const elementContent = document.querySelector(content);
+
+	if(!elementDialog) {
+		console.error(`Диалоговое окно '${dialog}' не найдено.`);
+		return false;
+	}
+	if(!elementContent) {
+		console.error(`Содержимое для диалогового окна '${content}' не найдено.`);
+		return false;
+	}
+
+	elementDialogContent.innerHTML = elementContent.innerHTML
+	elementDialog.showModal()
+}
+
+function closeDialog(target) {
+	const elementDialog = target.closest('dialog')
+	elementDialog.close()
+}
